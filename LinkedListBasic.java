@@ -1,4 +1,4 @@
-package kog;
+// ë§í¬ë“œë¦¬ìŠ¤íŠ¸ ì˜ˆì œ.
 
 class LinkedList2 {
 	String data;
@@ -14,13 +14,13 @@ public class LinkedListBasic {
 		tmp = new LinkedList2();
 		tmp.data = "Kim";
 		tmp.link = null;
-		list1 = tmp; // Âï¾î³½ »§ÀÇ ÁÖ¼Ò¸¦ list1¿¡ ÀúÀå. µåµğ¾î list1¿¡ Ã¹¹øÂ° ¿ø¼Ò°¡ ÀúÀåµÊ.
-		// µÎ¹øÂ° ¿ø¼Ò
+		list1 = tmp; // ì°ì–´ë‚¸ ë¹µì˜ ì£¼ì†Œë¥¼ list1ì— ì €ì¥. ë“œë””ì–´ list1ì— ì²«ë²ˆì§¸ ì›ì†Œê°€ ì €ì¥ë¨.
+		// ë‘ë²ˆì§¸ ì›ì†Œ
 		tmp = new LinkedList2();
 		tmp.data = "Lee";
 		tmp.link = null;
-		list1.link = tmp; // 2¹øÂ° ¿ø¼Ò¸¦ ³¡¿¡ ¿¬°á
-		// ¼¼¹øÂ° ¿ø¼Ò
+		list1.link = tmp; // 2ë²ˆì§¸ ì›ì†Œë¥¼ ëì— ì—°ê²°
+		// ì„¸ë²ˆì§¸ ì›ì†Œ
 		tmp = new LinkedList2();
 		tmp.data = "Park";
 		tmp.link = null;
@@ -29,20 +29,20 @@ public class LinkedListBasic {
 		System.out.print(list1.data + ", ");
 		System.out.print(list1.link.data + ", ");
 		System.out.println(list1.link.link.data + ")");
-		// 1. list2 = ("apple", "strawberry", "orange", "banana", "melon") ¸¸µé¾î¶ó.
+		// 1. list2 = ("apple", "strawberry", "orange", "banana", "melon") ë§Œë“¤ì–´ë¼.
 
 		tmp = new LinkedList2();
 		tmp.data = "apple";
 		tmp.link = null;
 		list2 = tmp;
-		tail = tmp; // last´Â ¸¶Áö¸· ³ëµå¸¦ °¡¸£Å²´Ù
+		tail = tmp; // lastëŠ” ë§ˆì§€ë§‰ ë…¸ë“œë¥¼ ê°€ë¥´í‚¨ë‹¤
 		tmp = new LinkedList2();
 		tmp.data = "strawberry";
 		tmp.link = null;
 		tail.link = tmp;
 		tail = tmp;
 
-		// Ãâ·ÂÇØº¸ÀÚ. ÀÌ ÄÚµå¸¦ ÀÌÇØÇÏ¸é ´Ù ÀÌÇØÇÑ °ÍÀÓ.
+		// ì¶œë ¥í•´ë³´ì. ì´ ì½”ë“œë¥¼ ì´í•´í•˜ë©´ ë‹¤ ì´í•´í•œ ê²ƒì„.
 		p = list2;
 		while (p != null) {
 			System.out.print(" " + p.data);
@@ -72,26 +72,26 @@ public class LinkedListBasic {
 		tmp = new LinkedList2();
 		tmp.data = "melon"; tmp.link = null;
 		list2.link.link.link.link = tmp;
-		// ¼±µÎ¿¡ ¿ø¼ÒÃß°¡ÇÏ¶ó
+		// ì„ ë‘ì— ì›ì†Œì¶”ê°€í•˜ë¼
 		tmp = new LinkedList2();
 		tmp.data = "pineapple"; tmp.link = list2;
 		list2 = tmp;
 		// 2. list2 = ("pineapple", "apple", "strawberry", "orange", "banana", "melon")
-		// ¸¸µé¾î¶ó
-		// µÎ¹øÂ° ¿ø¼Ò¸¦ Á¦°ÅÇÏ¶ó.
+		// ë§Œë“¤ì–´ë¼
+		// ë‘ë²ˆì§¸ ì›ì†Œë¥¼ ì œê±°í•˜ë¼.
 		list2.link = list2.link.link;
     
 		// 3. list2 = ("pineapple", "strawberry", "orange", "banana", "melon")
-		// 4. list2ÀÇ ¿ø¼ÒÀÇ °³¼ö¸¦ °è»êÇÏ¿© Ãâ·ÂÇÏ¶ó.
+		// 4. list2ì˜ ì›ì†Œì˜ ê°œìˆ˜ë¥¼ ê³„ì‚°í•˜ì—¬ ì¶œë ¥í•˜ë¼.
 		p = list2; int count = 0;
 		while (p != null)
 		{
 			count = count+1;
 			p = p.link;
 		}
-		System.out.println("³ëµåÀÇ °¹¼ö : " + count);
+		System.out.println("ë…¸ë“œì˜ ê°¯ìˆ˜ : " + count);
 		System.out.println();
-		// 5. list2ÀÇ ¸¶Áö¸·¿¡ "durian"À» Ãß°¡ÇÏ¶ó
+		// 5. list2ì˜ ë§ˆì§€ë§‰ì— "durian"ì„ ì¶”ê°€í•˜ë¼
 		tmp = new LinkedList2();
 		tmp.data = "durian"; tmp.link = null;
 		p = list2;
@@ -102,7 +102,7 @@ public class LinkedListBasic {
 		p.link = tmp;
 
 		// list2 = ("pineapple", "strawberry", "orange", "banana", "melon", "durian")
-		// 6. ¼¼¹øÂ° ¿ø¼ÒÀÎ "orange"¸¦ "grape"·Î º¯°æÇÏ¶ó
+		// 6. ì„¸ë²ˆì§¸ ì›ì†Œì¸ "orange"ë¥¼ "grape"ë¡œ ë³€ê²½í•˜ë¼
 		p = list2;
 		while(p.data != "orange")
 		{
