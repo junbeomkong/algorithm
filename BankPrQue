@@ -1,0 +1,107 @@
+import java.util.*;
+
+class Customer implements Comparable<Customer> {
+	int id;
+	int arrivals;
+	int service;
+	int priority;
+
+	public Customer(int id, int arrivals, int service, int priority) {
+		this.id = id;
+		this.arrivals = arrivals; // 도착시간
+		this.service = service; // 요구되는 서비스 시간
+		this.priority = priority; // 우선순위
+	}
+	@Override
+	public int compareTo(Customer cust)
+	{
+		 if(this.priority > cust.priority)
+		 {
+			 return 1;
+		 }
+		 else if (this.priority < cust.priority)
+		 {
+			 return -1;
+		 }
+		 else return 0;
+	}
+}
+
+public class BankPrQue {
+
+	public static void main(String args[]) {
+		// 손님 7명 랜덤으로 할 수 있으나 프로그램을 간단하게 하기 위해 초기값 부여
+		int[] arrivals = { 0, 15, 20, 20, 30, 40, 45 };// 도착시간
+		int[] service = { 20, 5, 10, 10, 15, 20, 5 }; // 요구되는 서비스 시간
+		int[] priority = { 3, 1, 2, 2, 1, 0, 1 }; // 우선순위
+		
+		//고객 응대시간 총 합.
+		int num = 0;
+		int[] intime = new int[7]; // 고객 입장 시간
+		int[] outtime = new int[7]; // 고객 기다린 시간.
+		int cnt=0;
+		Customer newCustomer;
+        Customer c1;
+		int t;
+		
+		int numOfMinutes = 120;
+		PriorityQueue<Customer> simulQ = new PriorityQueue<Customer>();
+
+		int queuedI = -1; // 현재 큐에 입장한 고객
+		int serviceTime = 0;
+		
+		for (t = 0; t <= numOfMinutes; t = t + 5) { // numOfMinutes 분 동안의 시뮬레이션
+			System.out.println(" t = " + t);
+			// 현재 손님이 몇 명 대기하고 있는가? size를 출력해볼 수 있을까?
+		
+              
+			for (int j = queuedI + 1; j < arrivals.length; j++) {
+				if (arrivals[j] == t) { // enqueue
+					queuedI = j;
+					c1 = new Customer(j+1, arrivals[j], service[j], priority[j]);
+					System.out.println((j+1) + " 번째 손님 입장 (시간: " + t + ")");
+					 intime[j] = t;
+					simulQ.add(c1);	
+				}
+				 
+			}
+			// deque
+			if (serviceTime <= 0) { // 직원이 서비스 가능
+				if (!simulQ.isEmpty()) { // 손님이 대기하고 있다면
+					newCustomer = simulQ.remove();
+					serviceTime = newCustomer.service;
+					System.out.println(newCustomer.id + " 번째 손님 서비스 시작 (시간: " + t + ")");
+					outtime[cnt] = t-intime[cnt];
+					cnt++;
+				}
+			} else {
+				// 은행직원이 5분 서비스 함
+				serviceTime = serviceTime - 5;
+			}
+		}
+		int max = outtime[0];
+		//가장 오래 기다린 고객의 대기시간
+		for(int i=0;i<arrivals.length-1;i++)
+		{
+			if(outtime[i] < outtime[i+1])
+			{
+				max = outtime[i+1];
+			}
+		}
+		System.out.println();
+		System.out.println("가장 오래 기다린 고객의 대기 시간:" + max);
+		double avg = 0.0f;
+		for(int i=0;i<arrivals.length;i++)
+		{
+           avg += outtime[i];
+		}
+		System.out.println("평균 대기 시간:" + avg/arrivals.length);
+		for(int i=0;i<service.length;i++)
+		{
+		   	num +=service[i];
+			
+		}
+		//전체 시간에서 고객 서비스시간을 제외한 나머지 시간은 직원이 대기하는 시간
+		 System.out.println("직원이 서비스 하지 않고 대기한 시간:"+ (numOfMinutes-num));	
+	}
+}
